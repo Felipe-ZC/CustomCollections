@@ -4,9 +4,9 @@ struct _list {
 } typedef array_list;
 
 array_list *init(int);
-void *remove(int);
-void *resize(array_list);
+void *del(int);
+void *resize(array_list*);
 void *get(int);
 void insert_at(int);
 void insert(void*);
-void dealloc_arr_list(array_list);
+void dealloc_alist(array_list*);
