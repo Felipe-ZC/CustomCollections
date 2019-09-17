@@ -29,12 +29,14 @@ void dealloc_map(hash_map *h_map)
 }
 
 // TODO: Check if there is already a value for the given key...
-// NOTE: Memory for value MUST be allocated already...
+// Memory for value must be dynamically allocated and freed
+// aka let the caller handle that...
 void insert(char *key, void *value, hash_map *h_map)
 {		
 	int index = h_map->hash(key);
 	if(index >= h_map->length)
-	   	index %= h_map->length;
+	   	index %= (h_map->length - 1);
+	// TODO: This only points to value
 	h_map->map[index] = value;
 }
 
