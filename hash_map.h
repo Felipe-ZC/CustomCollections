@@ -1,12 +1,11 @@
-#define BUFF 512
-
 struct _map {
-    void *map[BUFF];
-    int length = BUFF;
-    void (*hash)(int len);
+    void **map; 
+	int length;
+    int (*hash)(char*);
 } typedef hash_map;
 
-int default_hash(int len); // Default hash function 
-int insert(void *value, hash_map h_map);
-void *get(void *key);
-int dealloc_map(hash_map h_map);
+hash_map *init(int(*hashFunc)(char*));
+int default_hash(char*);  
+void insert(char*, void*, hash_map*);
+void *get(char*, hash_map*);
+void dealloc_map(hash_map*);
