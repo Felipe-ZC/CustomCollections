@@ -1,5 +1,6 @@
 CC=gcc # Compiler to use...
 CFLAGS=-I-c # gcc compile args...
 
-hashmap: hash_map/hash_map.c hash_map/hash_map.o
-	$(CC) -o hash_map hash_map.c hash_map.h
+all:
+	$(MAKE) clean -C hash_map  
+	$(MAKE) -C hash_map  
