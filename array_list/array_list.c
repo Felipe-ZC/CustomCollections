@@ -3,18 +3,13 @@
 #include <string.h>
 #include "array_list.h"
 
-//TODO: Dont give users access to the array_list directly!
+// TODO: Dont give users access to the array_list directly!
 // Declare it as static in this file so it can only be used
 // by methods defined in this file!
-
-// TODO: Dont use an int here,
-// use an unsigned int since a
-// the size of an array must be
-// a positive number.
 array_list *init() 
 {   
 	array_list *new_list = (array_list*)malloc(sizeof(array_list));
-	new_list->list = malloc(sizeof(void*) * BUFSIZ);
+	new_list->list = malloc(sizeof(void*)*BUFSIZ);
 	new_list->size = 0;
 	return new_list;
 }
@@ -38,10 +33,10 @@ void insert(void *value, array_list *a_list)
 	} // else return -1 
 }
 
-/*void *get(int index)*/
-/*{*/
-	
-/*}*/
+void *get(int index, array_list *a_list)
+{
+    return (a_list->size > index) ? a_list->list[index] : NULL;
+}
 
 int main() {
 	array_list *test = init(1);
@@ -51,6 +46,7 @@ int main() {
 	insert(dyna_str, test);
 	printf("%s\n", (char*)(test->list[0]));
 	printf("The length of the test array is %d\n", test->size);
+        free(dyna_str);
 	dealloc_alist(test);
 	return 0;
 }
