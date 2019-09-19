@@ -1,39 +1,56 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <string.h>
 #include "array_list.h"
+
+//TODO: Dont give users access to the array_list directly!
+// Declare it as static in this file so it can only be used
+// by methods defined in this file!
 
 // TODO: Dont use an int here,
 // use an unsigned int since a
 // the size of an array must be
 // a positive number.
-array_list *init(int init_size) 
+array_list *init() 
 {   
-    size_t init_len = (init_size > 0) ? init_size : BUFSIZ ;
-    array_list *new_list = (array_list*)malloc( sizeof(array_list));
-    new_list->list = malloc(sizeof(void*) * init_len);
-    new_list->length = init_len;
-    return new_list;
+	array_list *new_list = (array_list*)malloc(sizeof(array_list));
+	new_list->list = malloc(sizeof(void*) * BUFSIZ);
+	new_list->size = 0;
+	return new_list;
 }
 
 void dealloc_alist(array_list *a_list)
 {
-    int i;
-    for(i = 0; i < (a_list->length); ++i)
-        free(a_list->list[i]);
-    free(a_list->list);
+	int i;
+	// TODO: Add another function that deallocs all the items 
+	// inside of list, let user know its unsafe.
+	/*for(i = 0; i < (a_list->size); ++i) free(a_list->list[i]);*/
+	free(a_list->list);
+	free(a_list);
 }
 
 // Append a new element to the end of a_list.
 void insert(void *value, array_list *a_list)
 {
-    int i = 0;
-    void *iter = (a_list->list) + i;
-    while(*iter != NULL) iter += (++i); 
-    *iter = value;
+	if(a_list->size >= 0) {
+		a_list->list[(a_list->size)] = value;
+		a_list->size++;
+	} // else return -1 
 }
 
+/*void *get(int index)*/
+/*{*/
+	
+/*}*/
+
 int main() {
-    array_list *test = init(1);
-    printf("The length of the test array is %d\n", test->length);
-    return 0;
+	array_list *test = init(1);
+	char *dyna_str = (char*)malloc(sizeof(char*));
+	strcpy(dyna_str, "swag");
+	insert("yolo", test);
+	insert(dyna_str, test);
+	printf("%s\n", (char*)(test->list[0]));
+	printf("The length of the test array is %d\n", test->size);
+	dealloc_alist(test);
+	return 0;
 }
