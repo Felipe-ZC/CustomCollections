@@ -20,8 +20,8 @@ void dealloc_alist(array_list *a_list)
 
 int resize(array_list *a_list)
 {	
-	// Increase capacity by BUFISZ...
-	a_list->capacity *= BUFSIZ;
+	// Increase capacity by BUFSIZ elements...
+	a_list->capacity += BUFSIZ;
 	a_list->list = realloc(a_list->list, sizeof(void*) * (a_list->capacity));	
 	return a_list->capacity;
 }
@@ -29,13 +29,10 @@ int resize(array_list *a_list)
 // Append a new element to the end of a_list.
 int insert(void *value, array_list *a_list)
 {
-	if(a_list->size < a_list->capacity)
-   	{
-		a_list->list[(a_list->size)] = value;
-		a_list->size++;
-		return 0;
-	}
-   	else return resize(a_list); 
+	if(a_list->size >= a_list->capacity) resize(a_list);
+	a_list->list[(a_list->size)] = value;
+	a_list->size++;
+	return 0;
 }
 
 void* del(int index, array_list *a_list)
