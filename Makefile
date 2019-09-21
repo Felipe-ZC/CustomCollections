@@ -6,3 +6,7 @@ all:
 	$(MAKE) -C hash_map  
 	($(MAKE) clean -C array_list) || echo "no object files"
 	$(MAKE) -C array_list 
+
+array_list:
+	($(MAKE) clean -C array_list) || echo "no object files"
+	$(MAKE) -C array_list 
