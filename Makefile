@@ -1,17 +1,13 @@
 CC=gcc # Compiler to use...
 CFLAGS=-I-c # gcc compile args...
 
-all:
-	($(MAKE) clean -C hash_map) || echo "no object files"
-	$(MAKE) -C hash_map  
-	($(MAKE) clean -C array_list) || echo "no object files"
-	$(MAKE) -C array_list 
+all: _array_list _hash_map
 
-array_list:
+_array_list:
 	($(MAKE) clean -C array_list) || echo "no object files"
 	$(MAKE) -C array_list
 
-hash_map:
+_hash_map:
 	($(MAKE) clean -C hash_map) || echo "no object files"
 	$(MAKE) -C hash_map
 
