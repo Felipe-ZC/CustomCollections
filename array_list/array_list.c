@@ -29,7 +29,7 @@ int resize(array_list *a_list)
 // Append a new element to the end of a_list.
 int insert(void *value, array_list *a_list)
 {
-	if(a_list->size >= a_list->capacity) resize(a_list);
+	if(a_list->size == a_list->capacity) resize(a_list);
 	a_list->list[(a_list->size)] = value;
 	a_list->size++;
 	return 0;
