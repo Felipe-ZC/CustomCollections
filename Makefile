@@ -16,5 +16,4 @@ hash_map:
 	$(MAKE) -C hash_map
 
 lib: all
-	$(MAKE) all 
 	ar rcs ./lib/cc_lib.a array_list/array_list.o hash_map/hash_map.o 
